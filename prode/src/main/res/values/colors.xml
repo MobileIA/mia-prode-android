@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e41d3a</color>
+    <color name="colorPrimaryDark">#a8232f</color>
+    <color name="colorAccent">#66c5f5</color>
+    <color name="blackTransparent">#88000000</color>
+    <color name="whiteTransparent">#55FFFFFF</color>
+    <color name="colorGray">#cccccc</color>
+
+    <color name="prodeRedLight">#FFCDD2</color>
+    <color name="prodeRed">#e41d3a</color>
+    <color name="prodeRedAlpha">#55e41d3a</color>
+    <color name="prodeRedMedium">#cd212d</color>
+    <color name="prodeRedDark">#a8232f</color>
+    <color name="prodeGreen">#91bd45</color>
+    <color name="prodeGreenMedium">#77a740</color>
+    <color name="prodeGreenDark">#245633</color>
+    <color name="prodeBlueAlpha">#883276b9</color>
+    <color name="prodeBlue">#3276b9</color>
+    <color name="prodeBlueMedium">#004c88</color>
+    <color name="prodeBlueDark">#0d3559</color>
+    <color name="prodeCyan">#66c5f5</color>
+    <color name="prodeGray">#dae0f2</color>
+    <color name="prodeGrayMedium">#b6c6e8</color>
+</resources>
