@@ -13,6 +13,6 @@ import retrofit2.http.Query;
  */
 
 public interface RankingService {
-    @GET("ranking")
+    @GET("api/prode/ranking")
     RestBodyCall<ArrayList<Ranking>> list(@Query("access_token") String accessToken, @Query("group_id") int groupId);
 }
