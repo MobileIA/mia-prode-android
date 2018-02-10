@@ -18,7 +18,7 @@ public class BaseRealm {
     public Realm getInstance(){
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("prode.realm." + Mobileia.getInstance().getAppId())
-                .modules(Realm.getDefaultModule(), new ProdeModule())
+                .modules(new ProdeModule())
                 .build();
         return Realm.getInstance(config);
     }
