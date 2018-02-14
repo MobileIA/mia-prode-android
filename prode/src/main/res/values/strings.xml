@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">prode</string>
+    <!-- Create Group Activity -->
+    <string name="create_group_title">Nuevo Grupo</string>
+    <string name="create_group_hint_edit_title">Escribe el nombre del grupo</string>
+    <string name="create_group_edit_title_caption">Propone un nombre a tu grupo, para diferenciarlo de los demas.</string>
+    <string name="create_group_title_contacts">Participantes:</string>
+    <string name="create_group_hint_edit_tournament">Torneo</string>
+    <string name="create_group_persons_caption_loading">Estamos procesando los contactos seleccionados para corroborar si ya tienen cuenta en ShowProde.</string>
+    <string name="create_group_invite">Invitar</string>
+    <string name="create_group_menu_item">Crear</string>
+    <string name="create_group_text_sms">Tu amigo te esta invitando a jugar en ShowProde. www.showprode.com</string>
 </resources>
