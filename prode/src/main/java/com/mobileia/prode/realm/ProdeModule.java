@@ -9,6 +9,6 @@ import io.realm.annotations.RealmModule;
 /**
  * Created by matiascamiletti on 22/11/17.
  */
-@RealmModule(library = true, allClasses = false, classes = { Ranking.class, Group.class, Friend.class})
+@RealmModule(library = true, allClasses = false, classes = { Ranking.class, Friend.class, Group.class, })
 public class ProdeModule {
 }

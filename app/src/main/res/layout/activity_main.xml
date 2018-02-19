@@ -16,6 +16,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sincronizar grupos"
+                android:onClick="onClickSyncgroup"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver guardados"
+                android:onClick="onClickGroupSaved"/>
+
         </LinearLayout>
 
     </ScrollView>

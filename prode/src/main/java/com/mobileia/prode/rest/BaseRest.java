@@ -43,7 +43,7 @@ class BaseRest extends RestBuilder {
     public String getAccessToken(){
         User current = MobileiaAuth.getInstance(mContext).getCurrentUser();
         if(current == null){
-            return "";
+            return "03f7f76696e99f1fe1bb59eb494fdae37260192a";
         }
         return current.getAccessToken();
     }
