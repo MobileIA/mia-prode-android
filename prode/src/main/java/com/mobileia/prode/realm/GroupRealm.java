@@ -26,6 +26,17 @@ public class GroupRealm extends BaseRealm {
     }
 
     /**
+     * Devuelve todos los grupos guardados sincronizados
+     * @return
+     */
+    public RealmResults<Group> fetchAllAsync(){
+        // Obtenemos Realm
+        Realm realm = getInstance();
+        // Creamos Query
+        return realm.where(Group.class).findAllAsync();
+    }
+
+    /**
      * Devuelve el grupo a traves de su IDs
      * @param groupId
      * @return
