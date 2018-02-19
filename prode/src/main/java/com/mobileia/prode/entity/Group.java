@@ -23,6 +23,54 @@ public class Group extends RealmObject {
 
     public RealmList<Friend> contacts = new RealmList<Friend>();
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTournamentId() {
+        return tournament_id;
+    }
+
+    public void setTournamentId(int tournament_id) {
+        this.tournament_id = tournament_id;
+    }
+
+    public int getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStartDate() {
+        return start_date;
+    }
+
+    public void setStartDate(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public RealmList<Friend> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(RealmList<Friend> contacts) {
+        this.contacts = contacts;
+    }
+
     @Override
     public String toString() {
         return title;
