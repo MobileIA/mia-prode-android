@@ -10,4 +10,15 @@
     <string name="create_group_invite">Invitar</string>
     <string name="create_group_menu_item">Crear</string>
     <string name="create_group_text_sms">Tu amigo te esta invitando a jugar en ShowProde. www.showprode.com</string>
+    <!-- Notificaciones -->
+    <string name="notification_matches_now_title">Se viene el partido</string>
+    <string name="notification_matches_now_message">Ya arriesgaste un resultado?</string>
+    <string name="notification_prediction_correct_title">En el blanco!</string>
+    <string name="notification_prediction_correct_message">Tu predicción fue perfecta. Mirá tu ranking</string>
+    <string name="notification_new_group_title">Nuevo Grupo!</string>
+    <string name="notification_new_group_message">Uno de tus amigos, te ha invitado, entra a ganarle.</string>
+    <string name="notification_remove_group_title">Te han eliminado de un grupo!</string>
+    <string name="notification_remove_group_message">El administrador del grupo te ha eliminado.</string>
+    <string name="notification_leave_group_title">Un usuario ha abandonado el grupo!</string>
+    <string name="notification_leave_group_message">--user-- ha abandona el grupo: --group--</string>
 </resources>

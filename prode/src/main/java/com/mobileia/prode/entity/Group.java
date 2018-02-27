@@ -1,5 +1,7 @@
 package com.mobileia.prode.entity;
 
+import com.google.gson.JsonObject;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -22,6 +24,16 @@ public class Group extends RealmObject {
     public String start_date;
 
     public RealmList<Friend> contacts = new RealmList<Friend>();
+
+    public static Group fromJson(JsonObject json){
+        Group entity = new Group();
+        entity.id = json.get("id").getAsInt();
+        entity.tournament_id = json.get("tournament_id").getAsInt();
+        entity.user_id = json.get("user_id").getAsInt();
+        entity.title = json.get("title").getAsString();
+
+        return entity;
+    }
 
     public int getId() {
         return id;

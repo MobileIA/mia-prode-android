@@ -48,6 +48,23 @@ public class GroupRealm extends BaseRealm {
         return realm.where(Group.class).equalTo("id", groupId).findFirst();
     }
 
+    /**
+     * Elimina un grupo a traves de su ID
+     * @param groupId
+     */
+    public void removeById(int groupId){
+        // Obtenemos Realm
+        Realm realm = getInstance();
+        // Obtenemos grupo
+        Group group = realm.where(Group.class).equalTo("id", groupId).findFirst();
+        // Ejecurtamos transaccion
+        realm.beginTransaction();
+        // Eliminamos
+        group.deleteFromRealm();
+        // terminamos transaccion
+        realm.commitTransaction();
+    }
+
     public RealmResults<Friend> fetchAllUsers(int groupId){
         // Obtenemos Realm
         Realm realm = getInstance();
