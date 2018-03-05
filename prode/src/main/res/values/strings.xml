@@ -10,6 +10,8 @@
     <string name="create_group_invite">Invitar</string>
     <string name="create_group_menu_item">Crear</string>
     <string name="create_group_text_sms">Tu amigo te esta invitando a jugar en ShowProde. www.showprode.com</string>
+    <!-- Prediction Activity -->
+    <string name="prediction_error_send">No se ha podido enviar, vuelva a intentar.</string>
     <!-- Notificaciones -->
     <string name="notification_matches_now_title">Se viene el partido</string>
     <string name="notification_matches_now_message">Ya arriesgaste un resultado?</string>
