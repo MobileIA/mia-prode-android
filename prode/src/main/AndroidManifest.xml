@@ -12,7 +12,6 @@
 
         <activity
             android:name=".activity.PredictionActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/PredictionTheme" />
 
     </application>
