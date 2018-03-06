@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -25,6 +26,9 @@ public class Ranking extends RealmObject {
     public String firstname;
 
     public String photo;
+
+    @Ignore
+    public int is_me;
 
     public static Ranking fromMap(Map<String, String> data){
         Ranking entity = new Ranking();

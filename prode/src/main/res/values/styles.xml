@@ -16,4 +16,12 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <style name="BlueButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/prodeBlue</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">16dp</item>
+        <item name="backgroundTint">@color/prodeBlue</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

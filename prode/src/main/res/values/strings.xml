@@ -12,6 +12,18 @@
     <string name="create_group_text_sms">Tu amigo te esta invitando a jugar en ShowProde. www.showprode.com</string>
     <!-- Prediction Activity -->
     <string name="prediction_error_send">No se ha podido enviar, vuelva a intentar.</string>
+    <!-- Group Settings Activity -->
+    <string name="group_settings_add_friends">Añadir participantes</string>
+    <string name="group_setting_admin_text">Admin \ndel grupo</string>
+    <string name="group_setting_dialog_user_option_title">Acciones</string>
+    <string-array name="group_setting_dialog_user_options">
+        <item>Eliminar usuario</item>
+    </string-array>
+    <string name="group_setting_dialog_confirm_title">¿Esta seguro?</string>
+    <string name="group_setting_dialog_confirm_content">Esta por eliminar un usuario esta realmente seguro de querer hacerlo?</string>
+    <string name="group_setting_button_leave">Abandonar grupo</string>
+    <string name="group_setting_dialog_confirm_leave_title">¿Esta seguro?</string>
+    <string name="group_setting_dialog_confirm_leave_content">Esta por abandonar este grupo, esta seguro de esta acción?</string>
     <!-- Notificaciones -->
     <string name="notification_matches_now_title">Se viene el partido</string>
     <string name="notification_matches_now_message">Ya arriesgaste un resultado?</string>

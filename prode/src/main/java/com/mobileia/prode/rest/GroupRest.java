@@ -70,6 +70,110 @@ public class GroupRest extends BaseRest {
     }
 
     /**
+     * Funcion para eliminar un usuario de un grupo
+     * @param groupId
+     * @param userId
+     * @param callback
+     */
+    public void removeUser(int groupId, int userId, final OnRemoveComplete callback){
+        // Obtenemos servicio
+        GroupService service = createService(GroupService.class);
+        // Creamos la call
+        RestBodyCall<Boolean> call = service.removeUser(getAccessToken(), groupId, userId);
+        // Ejecutamos llamada
+        call.enqueue(new Callback<RestBody<Boolean>>() {
+            @Override
+            public void onResponse(Call<RestBody<Boolean>> call, Response<RestBody<Boolean>> response) {
+                if(!response.isSuccessful() || !response.body().success){
+                    callback.onSuccess(false);
+                    return;
+                }
+                callback.onSuccess(true);
+            }
+
+            @Override
+            public void onFailure(Call<RestBody<Boolean>> call, Throwable t) {
+                callback.onSuccess(false);
+            }
+        });
+    }
+
+    /**
+     * Servicio para que el usuario pueda eliminar un grupo
+     * @param groupId
+     * @param callback
+     */
+    public void leave(int groupId, final OnRemoveComplete callback){
+        // Obtenemos servicio
+        GroupService service = createService(GroupService.class);
+        // Creamos la call
+        RestBodyCall<Boolean> call = service.leave(getAccessToken(), groupId);
+        // Ejecutamos llamada
+        call.enqueue(new Callback<RestBody<Boolean>>() {
+            @Override
+            public void onResponse(Call<RestBody<Boolean>> call, Response<RestBody<Boolean>> response) {
+                if(!response.isSuccessful() || !response.body().success){
+                    callback.onSuccess(false);
+                    return;
+                }
+                callback.onSuccess(true);
+            }
+
+            @Override
+            public void onFailure(Call<RestBody<Boolean>> call, Throwable t) {
+                callback.onSuccess(false);
+            }
+        });
+    }
+
+    /**
+     * servicio para invitar a nuevas personas a un grupo
+     * @param groupId
+     * @param persons
+     * @param callback
+     */
+    public void invitation(int groupId, int modeId, int points, ArrayList<Profile> persons, final OnNewComplete callback){
+        // Obtenemos servicio
+        GroupService service = createService(GroupService.class);
+        // Generamos body
+        JsonObject params = new JsonObject();
+        params.addProperty("access_token", getAccessToken());
+        params.addProperty("group_id", groupId);
+        params.addProperty("mode_id", modeId);
+        params.addProperty("points", points);
+        // Recorres usuarios agregados
+        JsonArray contacts = new JsonArray();
+        for(Profile p : persons){
+            JsonObject at = new JsonObject();
+            at.addProperty("id", p.id);
+            at.addProperty("facebook", p.id);
+            at.addProperty("firstname", p.firstname);
+            at.addProperty("lastname", p.lastname);
+            at.addProperty("photo", p.picture);
+            contacts.add(at);
+        }
+        params.add("contacts", contacts);
+        // Generamos request
+        retrofit2.Call<RestBody<Group>> call = service.invitation(params);
+        // Ejecutamos request
+        call.enqueue(new Callback<RestBody<Group>>() {
+            @Override
+            public void onResponse(Call<RestBody<Group>> call, Response<RestBody<Group>> response) {
+                if(!response.isSuccessful() || !response.body().success){
+                    callback.onError();
+                    return;
+                }
+                callback.onSuccess(response.body().response);
+            }
+
+            @Override
+            public void onFailure(Call<RestBody<Group>> call, Throwable t) {
+                callback.onError();
+            }
+        });
+    }
+
+    /**
      * FUncino que se encarga de sincronizar los grupos del usuario
      */
     public void syncGroups(final OnSyncComplete callback){
@@ -105,5 +209,9 @@ public class GroupRest extends BaseRest {
 
     public interface OnSyncComplete{
         void onSuccess(ArrayList<Group> list);
+    }
+
+    public interface OnRemoveComplete{
+        void onSuccess(boolean success);
     }
 }

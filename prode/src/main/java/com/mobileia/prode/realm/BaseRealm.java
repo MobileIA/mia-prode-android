@@ -57,7 +57,7 @@ public class BaseRealm {
      * Elimina un objeto de la db interna
      * @param entity
      */
-    /*public void delete(RealmObject entity){
+    public void delete(RealmObject entity){
         // Obtain a Realm instance
         Realm realm = getInstance();
         // Iniciamos transaccion
@@ -66,5 +66,5 @@ public class BaseRealm {
         entity.deleteFromRealm();
         // Guardamos los cambios
         realm.commitTransaction();
-    }*/
+    }
 }

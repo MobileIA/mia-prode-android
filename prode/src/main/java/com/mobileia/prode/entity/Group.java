@@ -25,6 +25,8 @@ public class Group extends RealmObject {
 
     public RealmList<Friend> contacts = new RealmList<Friend>();
 
+    public int is_admin;
+
     public static Group fromJson(JsonObject json){
         Group entity = new Group();
         entity.id = json.get("id").getAsInt();

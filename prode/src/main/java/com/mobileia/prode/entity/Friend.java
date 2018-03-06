@@ -17,6 +17,10 @@ public class Friend extends RealmObject {
     public int user_id;
 
     public String email;
+    /**
+     * Representa el nombre de la agenda del usuario, este se utiliza cuando el usuario todavia no tiene cuenta en ShowProde
+     */
+    public String username;
 
     public String firstname;
 
