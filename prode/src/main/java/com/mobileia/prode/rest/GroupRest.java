@@ -9,6 +9,7 @@ import com.mobileia.contacts.entity.Person;
 import com.mobileia.core.rest.RestBody;
 import com.mobileia.core.rest.RestBodyCall;
 import com.mobileia.facebook.entity.Profile;
+import com.mobileia.prode.entity.Friend;
 import com.mobileia.prode.entity.Group;
 import com.mobileia.prode.realm.GroupRealm;
 import com.mobileia.prode.rest.service.GroupService;
@@ -29,7 +30,7 @@ public class GroupRest extends BaseRest {
         super(context);
     }
 
-    public void add(String title, int tournamentId, ArrayList<Profile> persons, final OnNewComplete callback){
+    public void add(String title, int tournamentId, ArrayList persons, final OnNewComplete callback){
         // Obtenemos servicio
         GroupService service = createService(GroupService.class);
         // Generamos body
@@ -39,13 +40,24 @@ public class GroupRest extends BaseRest {
         params.addProperty("tournament_id", tournamentId);
         // Recorres usuarios agregados
         JsonArray contacts = new JsonArray();
-        for(Profile p : persons){
+        for(Object o : persons){
             JsonObject at = new JsonObject();
-            at.addProperty("id", p.id);
-            at.addProperty("facebook", p.id);
-            at.addProperty("firstname", p.firstname);
-            at.addProperty("lastname", p.lastname);
-            at.addProperty("photo", p.picture);
+            if(o instanceof Profile){
+                Profile p = (Profile)o;
+                at.addProperty("id", p.id);
+                at.addProperty("user_id", 0);
+                at.addProperty("facebook", p.id);
+                at.addProperty("firstname", p.firstname);
+                at.addProperty("lastname", p.lastname);
+                at.addProperty("photo", p.picture);
+            }else if(o instanceof Friend){
+                Friend f = (Friend)o;
+                at.addProperty("id", f.id);
+                at.addProperty("user_id", f.id);
+                at.addProperty("firstname", f.firstname);
+                at.addProperty("lastname", f.lastname);
+                at.addProperty("photo", f.photo);
+            }
             contacts.add(at);
         }
         params.add("contacts", contacts);
