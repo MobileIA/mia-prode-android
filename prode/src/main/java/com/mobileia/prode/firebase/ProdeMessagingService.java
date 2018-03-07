@@ -25,6 +25,7 @@ public class ProdeMessagingService extends FirebaseMessagingService {
     public static final int TYPE_NEW_GROUP = 4;
     public static final int TYPE_REMOVED_GROUP = 5;
     public static final int TYPE_LEAVE_GROUP = 6;
+    public static final int TYPE_CUSTOM_NOTIFICATION = 7;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -53,6 +54,9 @@ public class ProdeMessagingService extends FirebaseMessagingService {
                 break;
             case TYPE_LEAVE_GROUP:
                 onLeaveGroup(remoteMessage);
+                break;
+            case TYPE_CUSTOM_NOTIFICATION:
+                onNotificationCustom(remoteMessage);
                 break;
         }
     }
@@ -113,6 +117,14 @@ public class ProdeMessagingService extends FirebaseMessagingService {
             public void onSuccess(ArrayList<Group> list) {
             }
         });
+    }
+
+    protected void onNotificationCustom(RemoteMessage remoteMessage){
+        // Obtener titulo y mensaje
+        String title = remoteMessage.getData().get("title");
+        String message = remoteMessage.getData().get("message");
+        // Creamos notificacion
+        new NotificationHelper(this).send(title, message);
     }
 
 }
