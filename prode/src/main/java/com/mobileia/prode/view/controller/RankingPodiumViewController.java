@@ -1,8 +1,11 @@
 package com.mobileia.prode.view.controller;
 
 import android.app.Activity;
+import android.support.annotation.DrawableRes;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.mobileia.prode.R;
 import com.mobileia.prode.entity.Ranking;
 import com.mobileia.prode.rest.RankingRest;
 import com.mobileia.prode.view.holder.RankingPodiumViewHolder;
@@ -39,5 +42,21 @@ public class RankingPodiumViewController extends BaseViewController {
 
             }
         });
+    }
+
+    /**
+     * Setea una imagen de fondo
+     * @param drawable
+     */
+    public void setImageBackgroundTop(int drawable){
+        ((RankingPodiumViewHolder)mViewHolder).imageBackgroundTop.setImageResource(drawable);
+    }
+
+    /**
+     * Obtiene el elemento de la imagen de fondo
+     * @return
+     */
+    public ImageView getImageBackgroundTopView(){
+        return ((RankingPodiumViewHolder)mViewHolder).imageBackgroundTop;
     }
 }

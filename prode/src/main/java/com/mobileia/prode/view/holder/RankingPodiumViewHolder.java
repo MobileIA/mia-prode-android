@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> {
 
+    public final ImageView imageBackgroundTop;
     public final ImageView imageOne;
     public final ImageView imageTwo;
     public final ImageView imageThree;
@@ -32,6 +33,7 @@ public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> 
 
     public RankingPodiumViewHolder(View itemView) {
         super(itemView);
+        imageBackgroundTop = itemView.findViewById(R.id.image_background_top);
         imageOne = itemView.findViewById(R.id.image_user_one);
         imageTwo = itemView.findViewById(R.id.image_user_two);
         imageThree = itemView.findViewById(R.id.image_user_three);

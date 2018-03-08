@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
+    <ImageView
+        android:id="@+id/image_background_top"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:scaleType="centerInside"
         android:background="@color/prodeRed"/>
 
     <LinearLayout
