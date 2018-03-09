@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.mobileia.prode.adapter.MatchAdapter;
 import com.mobileia.prode.entity.Match;
+import com.mobileia.prode.firebase.ProdeRegisterFirebase;
 import com.mobileia.prode.helper.ProdeLocalBroadcastHelper;
 import com.mobileia.prode.rest.MatchRest;
 import com.mobileia.recyclerview.scroll.EndScrollListener;
@@ -62,7 +63,7 @@ public class MatchListFragment extends RecyclerViewFragment implements OnRefresh
         // Cargar partidos
         loadMatches();
         // Iniciar servicio para recibir informacion en vivo
-        //FirebaseUtil.registerLive();
+        ProdeRegisterFirebase.registerLive();
         ProdeLocalBroadcastHelper.startUpdateMatch(getActivity(), mLiveBroadcast);
     }
 
@@ -90,7 +91,7 @@ public class MatchListFragment extends RecyclerViewFragment implements OnRefresh
         super.onDestroy();
         // Cancelar servicio para recibir en vivo
         ProdeLocalBroadcastHelper.stop(getActivity(), mLiveBroadcast);
-        //FirebaseUtil.unregisterLive();
+        ProdeRegisterFirebase.unregisterLive();
     }
 
     /**
