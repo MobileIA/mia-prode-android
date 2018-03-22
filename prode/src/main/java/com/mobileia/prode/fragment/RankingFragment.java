@@ -2,6 +2,7 @@ package com.mobileia.prode.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,9 @@ import java.util.ArrayList;
 public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String ARGUMENT_GROUP_ID = "ARGUMENT_GROUP_ID";
+    public static final String ARGUMENT_VISIBLE_ADD_BUTTON = "ARGUMENT_VISIBLE_ADD_BUTTON";
+
+    public static View.OnClickListener sAddButtonClick = null;
 
     /**
      * Adaptador del listado
@@ -37,6 +41,14 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
      * Almacena el ID del grupo seleccionado
      */
     protected int mGroupId = -1;
+    /**
+     * Alamcena si se muestra el boton para agregar
+     */
+    protected boolean mIsVisibleAddButton = false;
+    /**
+     * Almacena el boton para agregar participantes
+     */
+    protected FloatingActionButton mAddButton;
 
     /**
      * Constructor vacio
@@ -53,6 +65,22 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         RankingFragment fragment = new RankingFragment();
         Bundle args = new Bundle();
         args.putInt(ARGUMENT_GROUP_ID, groupId);
+        args.putBoolean(ARGUMENT_VISIBLE_ADD_BUTTON, false);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    /**
+     *
+     * @param groupId
+     * @param visibleAddButton
+     * @return
+     */
+    public static RankingFragment newInstance(int groupId, boolean visibleAddButton) {
+        RankingFragment fragment = new RankingFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARGUMENT_GROUP_ID, groupId);
+        args.putBoolean(ARGUMENT_VISIBLE_ADD_BUTTON, visibleAddButton);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,6 +95,7 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         // Obtenemos los argumentos del fragment
         if(getArguments() != null){
             mGroupId = getArguments().getInt(ARGUMENT_GROUP_ID);
+            mIsVisibleAddButton = getArguments().getBoolean(ARGUMENT_VISIBLE_ADD_BUTTON);
         }
     }
 
@@ -84,6 +113,8 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         View view = inflater.inflate(R.layout.fragment_ranking, container, false);
         // Configurar listado
         onCreateRecyclerView(view);
+        // Configurar boton
+        onCreateAddButton(view);
         // Devolvemos vista
         return view;
     }
@@ -96,6 +127,12 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         // Cargar de nuevo el listado
         loadRanking();
     }
+
+    /**
+     * Obtiene el boton para agregar
+     * @return
+     */
+    public FloatingActionButton getAddButton(){ return mAddButton; }
 
     /**
      * Consulta el servidor en busca de los datos
@@ -144,5 +181,25 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerView.setOnRefreshListener(this);
         // Cargar ranking
         loadRanking();
+    }
+
+    protected void onCreateAddButton(View view){
+        // Obtener boton
+        mAddButton = view.findViewById(R.id.add_button);
+        // Configurar visibilidad
+        if(mIsVisibleAddButton){
+            mAddButton.setVisibility(View.VISIBLE);
+        }else{
+            mAddButton.setVisibility(View.GONE);
+        }
+        // Configurar click
+        mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sAddButtonClick != null){
+                    sAddButtonClick.onClick(view);
+                }
+            }
+        });
     }
 }
