@@ -3,6 +3,7 @@ package com.mobileia.prode.view.holder;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.mobileia.core.dialog.ConfirmDialog;
 import com.mobileia.prode.R;
@@ -20,6 +21,8 @@ public class LeaveButtonViewHolder extends RecyclerView.ViewHolder implements Vi
 
     protected Activity mActivity;
 
+    protected Button leaveButton;
+
     /**
      * Almacena el grupo que se estan mostrando la configuracion
      */
@@ -32,7 +35,8 @@ public class LeaveButtonViewHolder extends RecyclerView.ViewHolder implements Vi
         mActivity = activity;
         mGroup = group;
         mListener = listener;
-        itemView.setOnClickListener(this);
+        leaveButton = itemView.findViewById(R.id.leave_button);
+        leaveButton.setOnClickListener(this);
     }
 
     @Override
