@@ -36,6 +36,14 @@ public class MatchViewController extends BaseViewController implements MatchAdap
         mListener = listener;
     }
 
+    public void setBlock(){
+        ((MatchViewHolder)mViewHolder).isBlock = true;
+    }
+
+    public void disableBlock(){
+        ((MatchViewHolder)mViewHolder).isBlock = false;
+    }
+
     /**
      * Setea el partido a mostrar
      * @param match

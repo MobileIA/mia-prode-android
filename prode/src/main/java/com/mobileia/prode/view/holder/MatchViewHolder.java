@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,8 +39,10 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
     public TextView points;
     public CountDownTimer timer;
     public long matchDayLong = -1;
+    public RelativeLayout blockView;
 
     public Match match;
+    public boolean isBlock = false;
 
     protected MatchAdapter.OnClickMatchAdapter onClickListener;
 
@@ -62,6 +65,9 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
 
     @Override
     public void onClick(View view) {
+        if(isBlock){
+            return;
+        }
         if(onClickListener != null){
             onClickListener.onClick(match);
         }
@@ -120,6 +126,12 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         resultTwo.setText(match.result_two + "");
 
         matchDayLong = match.day.getTime();
+
+        if(isBlock){
+            blockView.setVisibility(View.VISIBLE);
+        }else{
+            blockView.setVisibility(View.GONE);
+        }
 
         // Configurar el timer si fuera necesario
         processTimer();
@@ -180,6 +192,7 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         resultTwo = (TextView)itemView.findViewById(R.id.result_two);
         preditecTwo = (TextView)itemView.findViewById(R.id.predicted_two);
         points = (TextView)itemView.findViewById(R.id.text_points_two);
+        blockView = itemView.findViewById(R.id.block_match);
     }
 
 }
