@@ -143,7 +143,7 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onRemoveUser(final Friend friend) {
         // Eliminar usuario del servidor
-        new GroupRest(mActivity).removeUser(mGroup.id, friend.user_id, new GroupRest.OnRemoveComplete() {
+        GroupRest.OnRemoveComplete callback = new GroupRest.OnRemoveComplete() {
             @Override
             public void onSuccess(boolean success) {
                 // Recorremos los amigos
@@ -159,7 +159,13 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 // Refrescar usuarios
                 notifyDataSetChanged();
             }
-        });
+        };
+        if(friend.user_id == 0){
+            new GroupRest(mActivity).removeUserById(mGroup.id, friend.id, callback);
+        }else{
+            new GroupRest(mActivity).removeUser(mGroup.id, friend.user_id, callback);
+        }
+
     }
 
 

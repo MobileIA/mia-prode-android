@@ -109,6 +109,34 @@ public class GroupRest extends BaseRest {
             }
         });
     }
+    /**
+     * Funcion para eliminar un usuario de un grupo
+     * @param groupId
+     * @param groupRelationId
+     * @param callback
+     */
+    public void removeUserById(int groupId, long groupRelationId, final OnRemoveComplete callback){
+        // Obtenemos servicio
+        GroupService service = createService(GroupService.class);
+        // Creamos la call
+        RestBodyCall<Boolean> call = service.removeUserById(getAccessToken(), groupId, groupRelationId);
+        // Ejecutamos llamada
+        call.enqueue(new Callback<RestBody<Boolean>>() {
+            @Override
+            public void onResponse(Call<RestBody<Boolean>> call, Response<RestBody<Boolean>> response) {
+                if(!response.isSuccessful() || !response.body().success){
+                    callback.onSuccess(false);
+                    return;
+                }
+                callback.onSuccess(true);
+            }
+
+            @Override
+            public void onFailure(Call<RestBody<Boolean>> call, Throwable t) {
+                callback.onSuccess(false);
+            }
+        });
+    }
 
     /**
      * Servicio para que el usuario pueda eliminar un grupo
