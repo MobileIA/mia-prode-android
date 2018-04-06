@@ -1,6 +1,7 @@
 package com.mobileia.prode.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     public static final String ARGUMENT_GROUP_ID = "ARGUMENT_GROUP_ID";
     public static final String ARGUMENT_VISIBLE_ADD_BUTTON = "ARGUMENT_VISIBLE_ADD_BUTTON";
+    public static final String ARGUMENT_PRIMARY_COLOR = "ARGUMENT_PRIMARY_COLOR";
 
     public static View.OnClickListener sAddButtonClick = null;
 
@@ -49,6 +51,11 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
      * Almacena el boton para agregar participantes
      */
     protected FloatingActionButton mAddButton;
+    /**
+     *
+     */
+    @ColorRes
+    protected int mColorPrimary;
 
     /**
      * Constructor vacio
@@ -86,6 +93,22 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     /**
+     *
+     * @param groupId
+     * @param visibleAddButton
+     * @return
+     */
+    public static RankingFragment newInstance(int groupId, boolean visibleAddButton, @ColorRes int colorPrimary) {
+        RankingFragment fragment = new RankingFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARGUMENT_GROUP_ID, groupId);
+        args.putBoolean(ARGUMENT_VISIBLE_ADD_BUTTON, visibleAddButton);
+        args.putInt(ARGUMENT_PRIMARY_COLOR, colorPrimary);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    /**
      * Funcion que se ejecuta al crear el fragment para buscar los paraemtros requeridos
      * @param savedInstanceState
      */
@@ -96,6 +119,7 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         if(getArguments() != null){
             mGroupId = getArguments().getInt(ARGUMENT_GROUP_ID);
             mIsVisibleAddButton = getArguments().getBoolean(ARGUMENT_VISIBLE_ADD_BUTTON);
+            mColorPrimary = getArguments().getInt(ARGUMENT_PRIMARY_COLOR, 0);
         }
     }
 
@@ -173,6 +197,10 @@ public class RankingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Crear adapter para el ranking
         mAdapter = new RankingAdapter();
+        // Verificar si tiene asignado un color principal
+        if(mColorPrimary != 0){
+            mAdapter.setColorPrimary(mColorPrimary);
+        }
         // Asignar adapter
         mRecyclerView.setAdapter(mAdapter);
         // Asignar view de loading

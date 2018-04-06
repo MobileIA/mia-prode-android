@@ -1,6 +1,7 @@
 package com.mobileia.prode.adapter;
 
 import android.graphics.Color;
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public static final int TYPE_RANKING = 1;
 
     protected ArrayList<Ranking> mValues = new ArrayList<>();
+    protected int mColorPrimary = 0;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,9 +42,15 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         switch (holder.getItemViewType()){
             case TYPE_RANKING_TITLE:
                 ((RankingPodiumViewHolder) holder).bind(mValues);
+                if(mColorPrimary != 0){
+                    ((RankingPodiumViewHolder) holder).imageBackgroundTop.setBackgroundResource(mColorPrimary);
+                }
                 break;
             case TYPE_RANKING:
                 ((RankingViewHolder) holder).bind(mValues.get(position + 2), position);
+                if(mColorPrimary != 0){
+                    ((RankingViewHolder) holder).textPoints.setTextColor(mColorPrimary);
+                }
                 break;
         }
     }
@@ -67,4 +75,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         mValues = list;
         notifyDataSetChanged();
     }
+
+    public void setColorPrimary(@ColorRes int colorPrimary){ mColorPrimary = colorPrimary;}
 }

@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/MobileIA/mia-prode-android'
     gitUrl = 'https://github.com/MobileIA/mia-prode-android.git'
 
-    libraryVersion = '0.0.40'
+    libraryVersion = '0.0.41'
 
     developerId = 'mobileia'
     developerName = 'MobileIA'
@@ -33,8 +33,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 40
-        versionName "0.0.40"
+        versionCode 41
+        versionName "0.0.41"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
