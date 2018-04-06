@@ -44,6 +44,10 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * Almacena el grupo que se estan mostrando la configuracion
      */
     protected Group mGroup;
+    /**
+     * Valida si puede agregar participantes o no.
+     */
+    protected boolean mHasPermissionAdd = true;
 
     /**
      * constructor
@@ -78,7 +82,13 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 onBindTotalFriendViewHolder((TotalFriendsViewHolder)holder);
                 break;
             case TYPE_FRIEND:
-                onBindContactViewHolder((GroupUserViewHolder)holder, position-2);
+                int positionUser = 0;
+                if(mHasPermissionAdd){
+                    positionUser = position-2;
+                }else{
+                    positionUser = position-1;
+                }
+                onBindContactViewHolder((GroupUserViewHolder)holder, positionUser);
                 break;
         }
     }
@@ -96,17 +106,25 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return mFriends.size() + 3;
+        if(mHasPermissionAdd){
+            return mFriends.size() + 3;
+        }else{
+            return mFriends.size() + 2;
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
+        int maxFriends = (mFriends.size() + 2);
+        if(!mHasPermissionAdd){
+            maxFriends--;
+        }
+
         if(position == 0){
             return TYPE_TOTAL_FRIENDS;
-        }else if(position == 1){
+        }else if(position == 1 && mHasPermissionAdd){
             return TYPE_ADD_FRIEND;
-        }
-        else if(position > 1 && position < (mFriends.size() + 2)){
+        }else if(position > 0 && position < maxFriends){
             return TYPE_FRIEND;
         }
         return TYPE_LEAVE_BUTTON;
@@ -168,6 +186,7 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+    public void disableAddInvitation(){ this.mHasPermissionAdd = false; }
 
     public interface OnGroupSettingAdapterListener{
         void onAddFriendClick();
