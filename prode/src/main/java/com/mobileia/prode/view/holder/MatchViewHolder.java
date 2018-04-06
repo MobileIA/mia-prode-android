@@ -40,6 +40,7 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
     public CountDownTimer timer;
     public long matchDayLong = -1;
     public RelativeLayout blockView;
+    public TextView pointsMax;
 
     public Match match;
     public boolean isBlock = false;
@@ -193,6 +194,7 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         preditecTwo = (TextView)itemView.findViewById(R.id.predicted_two);
         points = (TextView)itemView.findViewById(R.id.text_points_two);
         blockView = itemView.findViewById(R.id.block_match);
+        pointsMax = itemView.findViewById(R.id.text_points_max);
     }
 
 }
