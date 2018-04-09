@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- item_match.xml -->
+    <dimen name="match_container_result_padding_left">10dp</dimen>
+    <dimen name="match_container_result_image_size">70dp</dimen>
+    <dimen name="match_container_result_result_size">40sp</dimen>
+    <dimen name="match_container_result_status_size">20sp</dimen>
+</resources>

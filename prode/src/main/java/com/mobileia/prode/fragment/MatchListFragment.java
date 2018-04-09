@@ -80,6 +80,8 @@ public class MatchListFragment extends RecyclerViewFragment implements OnRefresh
             if(m.id == match.id){
                 m.predicted_one = match.predicted_one;
                 m.predicted_two = match.predicted_two;
+                m.predicted_penalty_one = match.predicted_penalty_one;
+                m.predicted_penalty_two = match.predicted_penalty_two;
                 mAdapter.notifyDataSetChanged();
                 break;
             }

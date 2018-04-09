@@ -24,11 +24,11 @@ public class PredictionRest extends BaseRest {
      * Se encarga de enviar la prediccion al servidor
      * @param callback
      */
-    public void send(int groupId, int matchId, int resultOne, int resultTwo, final OnSendComplete callback){
+    public void send(int groupId, int matchId, int resultOne, int resultTwo, int penaltyOne, int penaltyTwo, final OnSendComplete callback){
         // Creamos el servicio
         PredictionService service = createService(PredictionService.class);
         // Creamos call
-        RestBodyCall<Boolean> call = service.send(getAccessToken(), groupId, matchId, resultOne, resultTwo);
+        RestBodyCall<Boolean> call = service.send(getAccessToken(), groupId, matchId, resultOne, resultTwo, penaltyOne, penaltyTwo);
         // Ejecutamos call
         call.enqueue(new Callback<RestBody<Boolean>>() {
             @Override

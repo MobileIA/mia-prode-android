@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,11 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
     public long matchDayLong = -1;
     public RelativeLayout blockView;
     public TextView pointsMax;
+    public LinearLayout containerPenalty;
+    public TextView preditecOnePenalty;
+    public TextView resultOnePenalty;
+    public TextView resultTwoPenalty;
+    public TextView preditecTwoPenalty;
 
     public Match match;
     public boolean isBlock = false;
@@ -103,6 +109,11 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
             cardView.setBackgroundResource(R.color.prodeBlueAlpha);
             statusTime.setVisibility(View.VISIBLE);
             statusMedium.setVisibility(View.GONE);
+        }else if(match.status == Match.STATUS_IN_PENALTY){
+            cardView.setBackgroundResource(R.color.prodeBlueAlpha);
+            statusTime.setVisibility(View.GONE);
+            statusMedium.setVisibility(View.VISIBLE);
+            statusMedium.setText("PE");
         }else{
             statusTime.setVisibility(View.GONE);
             statusMedium.setVisibility(View.VISIBLE);
@@ -134,8 +145,38 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
             blockView.setVisibility(View.GONE);
         }
 
+        // Verificar si se muestran los penales
+        if(match.has_penalty == 1){
+            bindPenalty();
+        }else{
+            containerPenalty.setVisibility(View.GONE);
+        }
+
         // Configurar el timer si fuera necesario
         processTimer();
+    }
+
+    protected void bindPenalty(){
+        containerPenalty.setVisibility(View.GONE);
+        if((match.status == Match.STATUS_ENDED && match.result_one != match.result_two) // Termino el partido y no termino en empate
+                || (match.status == Match.STATUS_PENDING && (match.predicted_one == -1 && match.predicted_two == -1) || (match.predicted_one != match.predicted_two)) // Partido todavia no comenzo y no se realizo ninguna predecion de empate
+                || (match.status == Match.STATUS_IN_PROGRESS && match.result_one != match.result_two) // Partido en progreso y va empatado
+                || match.status == Match.STATUS_IN_PROGRESS){
+            return;
+        }
+        containerPenalty.setVisibility(View.VISIBLE);
+        if(match.predicted_penalty_one == -1){
+            preditecOnePenalty.setText("-");
+        }else{
+            preditecOnePenalty.setText(match.predicted_penalty_one + "");
+        }
+        if(match.predicted_penalty_two == -1){
+            preditecTwoPenalty.setText("-");
+        }else{
+            preditecTwoPenalty.setText(match.predicted_penalty_two + "");
+        }
+        resultOnePenalty.setText(match.penalty_one + "");
+        resultTwoPenalty.setText(match.penalty_two + "");
     }
 
     protected void processTimer(){
@@ -157,14 +198,17 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
                 // Calcular los minutos del partido
                 long minutes = seconds / 60;
                 //long minutes = TimeUnit.MILLISECONDS.toMinutes(uptime);
-                if(minutes > 45 && minutes < 60){
+                if(minutes < 0){
+                    minutes = 0;
+                    seconds = 0;
+                }if(minutes > 45 && minutes < 60){
                     minutes = 45;
                     seconds = 60;
-                }else if(minutes >= 60){
-                    minutes -= 15;
                 }else if(minutes > 90){
                     minutes = 90;
                     seconds = 60;
+                }else if(minutes >= 60){
+                    minutes -= 15;
                 }
 
                 statusTime.setText(String.format("%02d:%02d", minutes, (seconds%60)));
@@ -195,6 +239,11 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         points = (TextView)itemView.findViewById(R.id.text_points_two);
         blockView = itemView.findViewById(R.id.block_match);
         pointsMax = itemView.findViewById(R.id.text_points_max);
+        containerPenalty = itemView.findViewById(R.id.card_view_penalty);
+        preditecOnePenalty = itemView.findViewById(R.id.predicted_one_penalty);
+        resultOnePenalty = itemView.findViewById(R.id.result_one_penalty);
+        preditecTwoPenalty = itemView.findViewById(R.id.predicted_two_penalty);
+        resultTwoPenalty = itemView.findViewById(R.id.result_two_penalty);
     }
 
 }

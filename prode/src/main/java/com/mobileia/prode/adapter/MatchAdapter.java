@@ -67,6 +67,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder> {
                 m.status = newMatch.status;
                 m.result_one = newMatch.result_one;
                 m.result_two = newMatch.result_two;
+                m.penalty_one = newMatch.penalty_one;
+                m.penalty_two = newMatch.penalty_two;
                 notifyDataSetChanged();
                 break;
             }

@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobileia.prode.R;
 import com.mobileia.prode.entity.Match;
 import com.mobileia.prode.rest.PredictionRest;
+
+import java.util.Date;
 
 public class PredictionActivity extends AppCompatActivity {
     /**
@@ -29,6 +32,9 @@ public class PredictionActivity extends AppCompatActivity {
      * Instancia del campo de texto del equipo dos
      */
     protected TextView mResultTwo;
+    protected TextView mResultPenaltyOne;
+    protected TextView mResultPenaltyTwo;
+    protected RelativeLayout mContainerPenalties;
     /**
      * Almacena el partido abierto
      */
@@ -57,6 +63,11 @@ public class PredictionActivity extends AppCompatActivity {
      * @param v
      */
     public void onClickConfirm(View v){
+        // Verificar si ya no paso la fecha
+        if(mMatch.day.getTime() <= new Date().getTime()){
+            Toast.makeText(this, "Ups, tenes que pronosticar hasta 2 minutos antes del comienzo!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // Verificar si ya se hizo click
         if(mIsSending){
             return;
@@ -66,8 +77,10 @@ public class PredictionActivity extends AppCompatActivity {
         // Guardamos los datos en el partido
         mMatch.predicted_one = Integer.valueOf(mResultOne.getText().toString());
         mMatch.predicted_two = Integer.valueOf(mResultTwo.getText().toString());
+        mMatch.predicted_penalty_one = Integer.valueOf(mResultPenaltyOne.getText().toString());
+        mMatch.predicted_penalty_two = Integer.valueOf(mResultPenaltyTwo.getText().toString());
         // Llamar al servidor
-        new PredictionRest(this).send(mGroupId, mMatch.id, mMatch.predicted_one, mMatch.predicted_two, new PredictionRest.OnSendComplete() {
+        new PredictionRest(this).send(mGroupId, mMatch.id, mMatch.predicted_one, mMatch.predicted_two, mMatch.predicted_penalty_one, mMatch.predicted_penalty_two, new PredictionRest.OnSendComplete() {
             @Override
             public void onSuccess() {
                 // Creamos intent para devolver los datos
@@ -106,6 +119,8 @@ public class PredictionActivity extends AppCompatActivity {
         int number = Integer.valueOf(numberString);
         // Sumamos uno
         mResultOne.setText((number+1) + "");
+        // Procesar penales
+        processPenalties();
     }
 
     /**
@@ -123,6 +138,8 @@ public class PredictionActivity extends AppCompatActivity {
         }
         // Restamos uno
         mResultOne.setText((number-1) + "");
+        // Procesar penales
+        processPenalties();
     }
 
     /**
@@ -136,6 +153,8 @@ public class PredictionActivity extends AppCompatActivity {
         int number = Integer.valueOf(numberString);
         // Sumamos uno
         mResultTwo.setText((number+1) + "");
+        // Procesar penales
+        processPenalties();
     }
 
     /**
@@ -153,6 +172,89 @@ public class PredictionActivity extends AppCompatActivity {
         }
         // Restamos uno
         mResultTwo.setText((number-1) + "");
+        // Procesar penales
+        processPenalties();
+    }
+    /**
+     * Funcion que suma un valor al equipo uno
+     * @param v
+     */
+    public void onClickUpOnePenalty(View v){
+        // Obtenemos valor actual
+        String numberString = mResultPenaltyOne.getText().toString();
+        // convertirmos a entero
+        int number = Integer.valueOf(numberString);
+        // Sumamos uno
+        mResultPenaltyOne.setText((number+1) + "");
+    }
+
+    /**
+     * Funcion que resta un valor al equipo uno
+     * @param v
+     */
+    public void onClickDownOnePenalty(View v){
+        // Obtenemos valor actual
+        String numberString = mResultPenaltyOne.getText().toString();
+        // convertirmos a entero
+        int number = Integer.valueOf(numberString);
+        // Verificamos si es 0
+        if(number == 0){
+            return;
+        }
+        // Restamos uno
+        mResultPenaltyOne.setText((number-1) + "");
+    }
+
+    /**
+     * Funcion que suma un valor al equipo uno
+     * @param v
+     */
+    public void onClickUpTwoPenalty(View v){
+        // Obtenemos valor actual
+        String numberString = mResultPenaltyTwo.getText().toString();
+        // convertirmos a entero
+        int number = Integer.valueOf(numberString);
+        // Sumamos uno
+        mResultPenaltyTwo.setText((number+1) + "");
+    }
+
+    /**
+     * Funcion que resta un valor al equipo uno
+     * @param v
+     */
+    public void onClickDownTwoPenalty(View v){
+        // Obtenemos valor actual
+        String numberString = mResultPenaltyTwo.getText().toString();
+        // convertirmos a entero
+        int number = Integer.valueOf(numberString);
+        // Verificamos si es 0
+        if(number == 0){
+            return;
+        }
+        // Restamos uno
+        mResultPenaltyTwo.setText((number-1) + "");
+    }
+
+    /**
+     * Funcion que procesa si hay penales
+     */
+    protected void processPenalties(){
+        // Verificar si el partido tiene penales
+        if(mMatch.has_penalty != 1){
+            return;
+        }
+        // convertirmos a entero
+        int numberOne = Integer.valueOf(mResultOne.getText().toString());
+        // convertirmos a entero
+        int numberTwo = Integer.valueOf(mResultTwo.getText().toString());
+        // Verificamos si hay empate
+        if(numberOne == numberTwo){
+            mContainerPenalties.setVisibility(View.VISIBLE);
+        }else{
+            mContainerPenalties.setVisibility(View.GONE);
+            mResultPenaltyOne.setText("0");
+            mResultPenaltyTwo.setText("0");
+        }
     }
 
     /**
@@ -162,6 +264,9 @@ public class PredictionActivity extends AppCompatActivity {
         // Obtenemos los campos de textos de resultado
         mResultOne = findViewById(R.id.result_team_one);
         mResultTwo = findViewById(R.id.result_team_two);
+        mResultPenaltyOne = findViewById(R.id.result_team_one_penalty);
+        mResultPenaltyTwo = findViewById(R.id.result_team_two_penalty);
+        mContainerPenalties = findViewById(R.id.container_penalties);
         // Setear nombres de los equipos
         ((TextView)findViewById(R.id.title_team_one)).setText(mMatch.title_short_one);
         ((TextView)findViewById(R.id.title_team_two)).setText(mMatch.title_short_two);
@@ -171,6 +276,16 @@ public class PredictionActivity extends AppCompatActivity {
         }
         if(mMatch.predicted_two > 0){
             mResultTwo.setText(mMatch.predicted_two + "");
+        }
+        if(mMatch.predicted_penalty_one > 0){
+            mResultPenaltyOne.setText(mMatch.predicted_penalty_one + "");
+        }
+        if(mMatch.predicted_penalty_two > 0){
+            mResultPenaltyTwo.setText(mMatch.predicted_penalty_two + "");
+        }
+        // Verificar si mostramos los penales
+        if(mMatch.has_penalty == 1 && mMatch.predicted_one == mMatch.predicted_two){
+            mContainerPenalties.setVisibility(View.VISIBLE);
         }
     }
     /**

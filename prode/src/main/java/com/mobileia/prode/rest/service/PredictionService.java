@@ -14,5 +14,5 @@ public interface PredictionService {
 
     @FormUrlEncoded
     @POST("api/prode/prediction/send")
-    RestBodyCall<Boolean> send(@Field("access_token") String accessToken, @Field("group_id") int groupId, @Field("match_id") int matchId, @Field("result_one") int resultOne, @Field("result_two") int resultTwo);
+    RestBodyCall<Boolean> send(@Field("access_token") String accessToken, @Field("group_id") int groupId, @Field("match_id") int matchId, @Field("result_one") int resultOne, @Field("result_two") int resultTwo, @Field("penalty_one") int penaltyOne, @Field("penalty_two") int penaltyTwo);
 }

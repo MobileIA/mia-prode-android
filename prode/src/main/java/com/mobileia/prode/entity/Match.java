@@ -20,6 +20,7 @@ public class Match extends RealmObject implements Parcelable {
     public static final int STATUS_PENDING = 0;
     public static final int STATUS_IN_PROGRESS = 1;
     public static final int STATUS_ENDED = 2;
+    public static final int STATUS_IN_PENALTY = 3;
 
     @PrimaryKey
     public int id;
@@ -38,7 +39,11 @@ public class Match extends RealmObject implements Parcelable {
 
     public int result_one;
 
+    public int penalty_one;
+
     public int predicted_one = -1;
+
+    public int predicted_penalty_one = -1;
 
     public String title_two;
 
@@ -50,11 +55,17 @@ public class Match extends RealmObject implements Parcelable {
 
     public int result_two;
 
+    public int penalty_two;
+
     public int predicted_two = -1;
+
+    public int predicted_penalty_two = -1;
 
     public int points = -1;
 
     public int status;
+
+    public int has_penalty = 0;
 
     public Match(){}
 
@@ -68,14 +79,19 @@ public class Match extends RealmObject implements Parcelable {
         team_one_id = in.readInt();
         result_one = in.readInt();
         predicted_one = in.readInt();
+        predicted_penalty_one = in.readInt();
         title_two = in.readString();
         title_short_two = in.readString();
         photo_two = in.readString();
         team_two_id = in.readInt();
         result_two = in.readInt();
         predicted_two = in.readInt();
+        predicted_penalty_two = in.readInt();
         points = in.readInt();
         status = in.readInt();
+        has_penalty = in.readInt();
+        penalty_one = in.readInt();
+        penalty_two = in.readInt();
     }
 
     @Override
@@ -94,14 +110,19 @@ public class Match extends RealmObject implements Parcelable {
         parcel.writeInt(team_one_id);
         parcel.writeInt(result_one);
         parcel.writeInt(predicted_one);
+        parcel.writeInt(predicted_penalty_one);
         parcel.writeString(title_two);
         parcel.writeString(title_short_two);
         parcel.writeString(photo_two);
         parcel.writeInt(team_two_id);
         parcel.writeInt(result_two);
         parcel.writeInt(predicted_two);
+        parcel.writeInt(predicted_penalty_two);
         parcel.writeInt(points);
         parcel.writeInt(status);
+        parcel.writeInt(has_penalty);
+        parcel.writeInt(penalty_one);
+        parcel.writeInt(penalty_two);
     }
 
     public static final Creator<Match> CREATOR = new Creator<Match>() {
@@ -135,9 +156,27 @@ public class Match extends RealmObject implements Parcelable {
         entity.stage_id = json.get("stage_id").getAsInt();
         //entity.day = DateHelper.stringMysqlToDate(json.get("day").getAsString(), true);
         entity.team_one_id = json.get("team_one_id").getAsInt();
-        entity.result_one = json.get("result_one").getAsInt();
+        try {
+            entity.result_one = json.get("result_one").getAsInt();
+        }catch (Exception ex){
+            entity.result_one = 0;
+        }
         entity.team_two_id = json.get("team_two_id").getAsInt();
-        entity.result_two = json.get("result_two").getAsInt();
+        try {
+            entity.result_two = json.get("result_two").getAsInt();
+        }catch (Exception ex){
+            entity.result_two = 0;
+        }
+        try {
+            entity.penalty_one = json.get("penalty_one").getAsInt();
+        }catch (Exception ex){
+            entity.penalty_one = 0;
+        }
+        try {
+            entity.penalty_two = json.get("penalty_two").getAsInt();
+        }catch (Exception ex){
+            entity.penalty_two = 0;
+        }
         entity.status = json.get("status").getAsInt();
 
         return entity;
