@@ -85,6 +85,8 @@ public class Group extends RealmObject {
         this.contacts = contacts;
     }
 
+    public int isAdmin(){ return is_admin; }
+
     @Override
     public String toString() {
         return title;
