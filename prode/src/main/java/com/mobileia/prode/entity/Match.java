@@ -67,6 +67,8 @@ public class Match extends RealmObject implements Parcelable {
 
     public int has_penalty = 0;
 
+    public int max_points = 5;
+
     public Match(){}
 
     public Match(Parcel in){
@@ -92,6 +94,7 @@ public class Match extends RealmObject implements Parcelable {
         has_penalty = in.readInt();
         penalty_one = in.readInt();
         penalty_two = in.readInt();
+        max_points = in.readInt();
     }
 
     @Override
@@ -123,6 +126,7 @@ public class Match extends RealmObject implements Parcelable {
         parcel.writeInt(has_penalty);
         parcel.writeInt(penalty_one);
         parcel.writeInt(penalty_two);
+        parcel.writeInt(max_points);
     }
 
     public static final Creator<Match> CREATOR = new Creator<Match>() {

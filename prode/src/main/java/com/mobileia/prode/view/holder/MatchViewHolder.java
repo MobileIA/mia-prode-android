@@ -152,6 +152,8 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
             containerPenalty.setVisibility(View.GONE);
         }
 
+        pointsMax.setText("Hasta " + match.max_points + " puntos");
+
         // Configurar el timer si fuera necesario
         processTimer();
     }
