@@ -140,9 +140,9 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         matchDayLong = match.day.getTime();
 
         if(isBlock){
-            blockView.setVisibility(View.VISIBLE);
+            //blockView.setVisibility(View.VISIBLE);
         }else{
-            blockView.setVisibility(View.GONE);
+            //blockView.setVisibility(View.GONE);
         }
 
         // Verificar si se muestran los penales
