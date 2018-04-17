@@ -63,7 +63,6 @@ public class MatchListFragment extends RecyclerViewFragment implements OnRefresh
         // Cargar partidos
         loadMatches();
         // Iniciar servicio para recibir informacion en vivo
-        ProdeRegisterFirebase.registerLive();
         ProdeLocalBroadcastHelper.startUpdateMatch(getActivity(), mLiveBroadcast);
     }
 
@@ -93,7 +92,6 @@ public class MatchListFragment extends RecyclerViewFragment implements OnRefresh
         super.onDestroy();
         // Cancelar servicio para recibir en vivo
         ProdeLocalBroadcastHelper.stop(getActivity(), mLiveBroadcast);
-        ProdeRegisterFirebase.unregisterLive();
     }
 
     /**
