@@ -70,17 +70,17 @@ public class ProdeMessagingService extends FirebaseMessagingService {
 
     protected void onMatchesNow(RemoteMessage remoteMessage){
         // Creamos notificacion
-        new NotificationHelper(this).send(R.string.notification_matches_now_title, R.string.notification_matches_now_message);
+        //new NotificationHelper(this).send(R.string.notification_matches_now_title, R.string.notification_matches_now_message);
     }
 
     protected void onPredictionCorrect(RemoteMessage remoteMessage){
         // Creamos notificacion
-        new NotificationHelper(this).send(R.string.notification_prediction_correct_title, R.string.notification_prediction_correct_message);
+        //new NotificationHelper(this).send(R.string.notification_prediction_correct_title, R.string.notification_prediction_correct_message);
     }
 
     protected void onNewGroup(RemoteMessage remoteMessage){
         // Creamos notificacion
-        new NotificationHelper(this).send(R.string.notification_new_group_title, R.string.notification_new_group_message);
+        //new NotificationHelper(this).send(R.string.notification_new_group_title, R.string.notification_new_group_message);
         // Sincronizar grupos
         new GroupRest(getApplicationContext()).syncGroups(new GroupRest.OnSyncComplete() {
             @Override
@@ -97,7 +97,7 @@ public class ProdeMessagingService extends FirebaseMessagingService {
         // Obtener ID del grupo
         int groupId = Integer.valueOf(remoteMessage.getData().get("group_id"));
         // Creamos notificacion
-        new NotificationHelper(this).send(R.string.notification_remove_group_title, R.string.notification_remove_group_message);
+        //new NotificationHelper(this).send(R.string.notification_remove_group_title, R.string.notification_remove_group_message);
         // Eliminar grupo de la DB
         new GroupRealm().removeById(groupId);
     }
@@ -110,7 +110,7 @@ public class ProdeMessagingService extends FirebaseMessagingService {
         content = content.replace("--user--", remoteMessage.getData().get("firstname"));
         content = content.replace("--group--", group.title);
         // Creamos notificacion
-        new NotificationHelper(this).send(getApplicationContext().getResources().getString(R.string.notification_leave_group_title), content);
+        //new NotificationHelper(this).send(getApplicationContext().getResources().getString(R.string.notification_leave_group_title), content);
         // Sincronizar grupos
         new GroupRest(getApplicationContext()).syncGroups(new GroupRest.OnSyncComplete() {
             @Override
