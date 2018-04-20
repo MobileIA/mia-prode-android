@@ -19,6 +19,45 @@ public class ConfigRealm extends BaseRealm {
         changeNotificationMatchesNow(false);
     }
 
+    public void changeFirstOnboardingHome(int state){
+        // Obtenemos condig
+        Config config = fetchConfig();
+        // Obtenemos Realm
+        Realm realm = getInstance();
+        // Iniciamos transaccion
+        realm.beginTransaction();
+        // Actualizamos
+        config.first_onboarding_home = state;
+        // Comitiamos transaccion
+        realm.commitTransaction();
+    }
+
+    public void changeFirstOnboardingTrivia(int state){
+        // Obtenemos condig
+        Config config = fetchConfig();
+        // Obtenemos Realm
+        Realm realm = getInstance();
+        // Iniciamos transaccion
+        realm.beginTransaction();
+        // Actualizamos
+        config.first_onboarding_trivia = state;
+        // Comitiamos transaccion
+        realm.commitTransaction();
+    }
+
+    public void changeFirstOnboardingProde(int state){
+        // Obtenemos condig
+        Config config = fetchConfig();
+        // Obtenemos Realm
+        Realm realm = getInstance();
+        // Iniciamos transaccion
+        realm.beginTransaction();
+        // Actualizamos
+        config.first_onboarding_prode = state;
+        // Comitiamos transaccion
+        realm.commitTransaction();
+    }
+
     public void changeNotificationMatchesNow(boolean state){
         // Obtenemos condig
         Config config = fetchConfig();

@@ -27,6 +27,8 @@ public class Group extends RealmObject {
 
     public int is_admin;
 
+    public int is_closed = 0;
+
     public static Group fromJson(JsonObject json){
         Group entity = new Group();
         entity.id = json.get("id").getAsInt();
@@ -86,6 +88,8 @@ public class Group extends RealmObject {
     }
 
     public int isAdmin(){ return is_admin; }
+
+    public int isClosed(){ return is_closed; }
 
     @Override
     public String toString() {

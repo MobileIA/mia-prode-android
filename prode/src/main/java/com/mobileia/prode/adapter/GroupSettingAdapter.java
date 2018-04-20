@@ -2,6 +2,7 @@ package com.mobileia.prode.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -101,6 +102,11 @@ public class GroupSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Object item = mFriends.get(position);
         if(item instanceof Friend){
             holder.bind((Friend)item);
+            if(((Friend) item).user_id == 0){
+                holder.title.setTextColor(mActivity.getResources().getColor(android.R.color.darker_gray));
+            }else{
+                holder.title.setTextColor(mActivity.getResources().getColor(android.R.color.black));
+            }
         }
     }
 

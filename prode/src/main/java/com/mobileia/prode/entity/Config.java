@@ -15,6 +15,12 @@ public class Config extends RealmObject {
 
     public boolean notification_prediction_correct = true;
 
+    public int first_onboarding_home = 1;
+
+    public int first_onboarding_trivia = 1;
+
+    public int first_onboarding_prode = 1;
+
     public int getId() {
         return id;
     }
@@ -38,4 +44,10 @@ public class Config extends RealmObject {
     public void setNotificationPredictionCorrect(boolean notification_prediction_correct) {
         this.notification_prediction_correct = notification_prediction_correct;
     }
+
+    public int getFirstOnboardingHome(){ return this.first_onboarding_home; }
+
+    public int getFirstOnboardingTrivia(){ return this.first_onboarding_trivia; }
+
+    public int getFirstOnboardingProde(){ return this.first_onboarding_prode; }
 }
