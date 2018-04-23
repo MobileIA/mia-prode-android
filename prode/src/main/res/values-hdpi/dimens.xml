@@ -2,7 +2,9 @@
 <resources>
     <!-- item_match.xml -->
     <dimen name="match_container_result_padding_left">0dp</dimen>
-    <dimen name="match_container_result_image_size">60dp</dimen>
+    <dimen name="match_container_result_image_size">50dp</dimen>
     <dimen name="match_container_result_result_size">35sp</dimen>
     <dimen name="match_container_result_status_size">16sp</dimen>
+    <dimen name="match_container_result_prediction_size">14sp</dimen>
+    <dimen name="match_container_result_name_size">18sp</dimen>
 </resources>
