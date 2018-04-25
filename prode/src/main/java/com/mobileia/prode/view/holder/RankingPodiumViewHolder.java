@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> {
 
+    public View view;
     public final ImageView imageBackgroundTop;
     public final ImageView imageOne;
     public final ImageView imageTwo;
@@ -33,6 +34,7 @@ public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> 
 
     public RankingPodiumViewHolder(View itemView) {
         super(itemView);
+        view = itemView;
         imageBackgroundTop = itemView.findViewById(R.id.image_background_top);
         imageOne = itemView.findViewById(R.id.image_user_one);
         imageTwo = itemView.findViewById(R.id.image_user_two);
@@ -72,6 +74,11 @@ public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> 
         }
         nameOne.setText(ranking.firstname);
         pointsOne.setText(ranking.points + " puntos");
+        if(ranking.user_id == 0){
+            nameOne.setTextColor(view.getContext().getResources().getColor(android.R.color.darker_gray));
+        }else{
+            nameOne.setTextColor(view.getContext().getResources().getColor(android.R.color.black));
+        }
     }
 
     public void cleanOne(){
@@ -88,6 +95,11 @@ public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> 
         }
         nameTwo.setText(ranking.firstname);
         pointsTwo.setText(ranking.points + " puntos");
+        if(ranking.user_id == 0){
+            nameTwo.setTextColor(view.getContext().getResources().getColor(android.R.color.darker_gray));
+        }else{
+            nameTwo.setTextColor(view.getContext().getResources().getColor(android.R.color.black));
+        }
     }
 
     public void cleanTwo(){
@@ -104,6 +116,11 @@ public class RankingPodiumViewHolder extends BaseViewHolder<ArrayList<Ranking>> 
         }
         nameThree.setText(ranking.firstname);
         pointsThree.setText(ranking.points + " puntos");
+        if(ranking.user_id == 0){
+            nameThree.setTextColor(view.getContext().getResources().getColor(android.R.color.darker_gray));
+        }else{
+            nameThree.setTextColor(view.getContext().getResources().getColor(android.R.color.black));
+        }
     }
 
     public void cleanThree(){

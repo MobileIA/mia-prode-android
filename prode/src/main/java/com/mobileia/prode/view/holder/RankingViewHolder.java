@@ -1,10 +1,12 @@
 package com.mobileia.prode.view.holder;
 
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.internal.ThemeSingleton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mobileia.prode.R;
@@ -44,6 +46,11 @@ public class RankingViewHolder extends RecyclerView.ViewHolder {
             Glide.with(image).load(ranking.photo).apply(RequestOptions.circleCropTransform()).into(image);
         }else{
             image.setImageResource(R.drawable.avatar_three_gray);
+        }
+        if(r.user_id == 0){
+            textUsername.setTextColor(view.getContext().getResources().getColor(android.R.color.darker_gray));
+        }else{
+            textUsername.setTextColor(view.getContext().getResources().getColor(android.R.color.black));
         }
     }
 }
