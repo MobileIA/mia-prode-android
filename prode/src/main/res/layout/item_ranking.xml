@@ -30,11 +30,15 @@
         android:id="@+id/text_username"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="matiasdev"
+        android:text="Franciso"
         android:textSize="18sp"
+        android:ellipsize="end"
+        android:lines="2"
         android:gravity="center_vertical"
         android:textColor="@android:color/black"
-        android:layout_toRightOf="@+id/image_avatar"/>
+        android:layout_toRightOf="@+id/image_avatar"
+        android:layout_toLeftOf="@+id/text_points"
+        android:layout_marginRight="8dp"/>
 
     <TextView
         android:id="@+id/text_points"
