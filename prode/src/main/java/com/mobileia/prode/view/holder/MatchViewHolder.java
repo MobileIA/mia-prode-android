@@ -107,8 +107,8 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
 
         if(match.status == Match.STATUS_IN_PROGRESS){
             cardView.setBackgroundResource(R.color.prodeBlueAlpha);
-            statusTime.setVisibility(View.VISIBLE);
-            statusMedium.setVisibility(View.GONE);
+            statusTime.setVisibility(View.GONE);
+            statusMedium.setVisibility(View.VISIBLE);
         }else if(match.status == Match.STATUS_IN_PENALTY){
             cardView.setBackgroundResource(R.color.prodeBlueAlpha);
             statusTime.setVisibility(View.GONE);
@@ -203,14 +203,19 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
                 if(minutes < 0){
                     minutes = 0;
                     seconds = 0;
+                    statusMedium.setText("PT");
                 }if(minutes > 45 && minutes < 60){
                     minutes = 45;
                     seconds = 60;
                 }else if(minutes > 90){
                     minutes = 90;
                     seconds = 60;
+                    statusMedium.setText("ST");
                 }else if(minutes >= 60){
                     minutes -= 15;
+                    statusMedium.setText("ST");
+                }else{
+                    statusMedium.setText("PT");
                 }
 
                 statusTime.setText(String.format("%02d:%02d", minutes, (seconds%60)));
