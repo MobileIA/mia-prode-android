@@ -32,6 +32,10 @@ public class GroupUserViewHolder extends BaseViewHolder<Friend> implements View.
      */
     public final ImageView image;
     /**
+     * Instancia del elemento que muestra si es el admin del grupo
+     */
+    public final TextView admin;
+    /**
      * Almacena el grupo que se estan mostrando la configuracion
      */
     protected Group mGroup;
@@ -58,6 +62,7 @@ public class GroupUserViewHolder extends BaseViewHolder<Friend> implements View.
         title = itemView.findViewById(R.id.text_name);
         subtitle = itemView.findViewById(R.id.text_data);
         image = itemView.findViewById(R.id.image);
+        admin = itemView.findViewById(R.id.text_admin);
     }
 
     @Override
@@ -79,6 +84,16 @@ public class GroupUserViewHolder extends BaseViewHolder<Friend> implements View.
             Glide.with(image).load(photo).apply(RequestOptions.circleCropTransform()).into(image);
         } else {
             Glide.with(image).load(R.drawable.avatar_three_gray).apply(RequestOptions.circleCropTransform()).into(image);
+        }
+        // Verificar si es el admin
+        if(mGroup == null){
+            admin.setVisibility(View.GONE);
+            return;
+        }
+        if(mGroup.user_id == object.user_id){
+            admin.setVisibility(View.VISIBLE);
+        }else{
+            admin.setVisibility(View.GONE);
         }
     }
 

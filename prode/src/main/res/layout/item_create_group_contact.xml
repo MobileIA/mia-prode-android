@@ -22,7 +22,7 @@
         android:layout_toRightOf="@+id/image"
         android:gravity="center_vertical"
         android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/btn_invite">
+        android:layout_toLeftOf="@+id/container_right">
 
         <TextView
             android:id="@+id/text_name"
@@ -44,19 +44,42 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/btn_invite"
+    <LinearLayout
+        android:id="@+id/container_right"
         android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        app:srcCompat="@drawable/com_facebook_button_icon"
-        android:layout_alignParentRight="true"
-        android:background="@color/prodeRed"
-        android:tint="@android:color/white"
-        android:padding="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginRight="10dp"
-        android:visibility="gone"
-        />
+        android:layout_alignParentRight="true">
+
+        <ImageButton
+            android:id="@+id/btn_invite"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            app:srcCompat="@drawable/com_facebook_button_icon"
+            android:layout_alignParentRight="true"
+            android:background="@color/prodeRed"
+            android:tint="@android:color/white"
+            android:padding="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/text_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:textStyle="bold"
+            android:text="Admin"
+            android:textSize="12sp"
+            android:gravity="center_horizontal|center_vertical"
+            android:textColor="@color/prodeRed"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
