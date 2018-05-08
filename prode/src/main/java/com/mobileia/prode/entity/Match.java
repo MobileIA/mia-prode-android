@@ -3,8 +3,6 @@ package com.mobileia.prode.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.JsonParser;
-
 import java.util.Date;
 import java.util.Map;
 import com.google.gson.JsonObject;
@@ -19,8 +17,13 @@ public class Match extends RealmObject implements Parcelable {
 
     public static final int STATUS_PENDING = 0;
     public static final int STATUS_IN_PROGRESS = 1;
-    public static final int STATUS_ENDED = 2;
-    public static final int STATUS_IN_PENALTY = 3;
+    public static final int STATUS_IN_FIRST_TIME = 1;
+    public static final int STATUS_IN_BETWEEN_TIME = 2;
+    public static final int STATUS_IN_SECOND_TIME = 3;
+    public static final int STATUS_IN_FIRST_TIME_EXTRA = 4;
+    public static final int STATUS_IN_SECOND_TIME_EXTRA = 5;
+    public static final int STATUS_IN_PENALTY = 6;
+    public static final int STATUS_ENDED = 7;
 
     @PrimaryKey
     public int id;
@@ -70,6 +73,28 @@ public class Match extends RealmObject implements Parcelable {
     public int max_points = 5;
 
     public Match(){}
+
+    public String statusToString(){
+        switch (status){
+            case STATUS_IN_FIRST_TIME:
+                return "PT";
+            case STATUS_IN_BETWEEN_TIME:
+                return "ET";
+            case STATUS_IN_SECOND_TIME:
+                return "ST";
+            case STATUS_IN_FIRST_TIME_EXTRA:
+                return "PTE";
+            case STATUS_IN_SECOND_TIME_EXTRA:
+                return "STE";
+            case STATUS_IN_PENALTY:
+                return "PE";
+            case STATUS_ENDED:
+                return "FIN";
+            case STATUS_PENDING:
+                return "-";
+        }
+        return "";
+    };
 
     public Match(Parcel in){
         id = in.readInt();

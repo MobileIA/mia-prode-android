@@ -97,26 +97,17 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
             imageTwo.setImageResource(R.drawable.avatar_three_gray);
         }
 
+        statusTime.setVisibility(View.GONE);
+        statusMedium.setVisibility(View.VISIBLE);
         if(match.status == Match.STATUS_ENDED){
             cardView.setBackgroundResource(R.color.colorGray);
-            statusMedium.setText("Fin");
-        }else{
+            statusMedium.setText("FIN");
+        }else if(match.status == Match.STATUS_PENDING){
             cardView.setBackgroundResource(android.R.color.white);
             statusMedium.setText("-");
-        }
-
-        if(match.status == Match.STATUS_IN_PROGRESS){
-            cardView.setBackgroundResource(R.color.prodeBlueAlpha);
-            statusTime.setVisibility(View.GONE);
-            statusMedium.setVisibility(View.VISIBLE);
-        }else if(match.status == Match.STATUS_IN_PENALTY){
-            cardView.setBackgroundResource(R.color.prodeBlueAlpha);
-            statusTime.setVisibility(View.GONE);
-            statusMedium.setVisibility(View.VISIBLE);
-            statusMedium.setText("PE");
         }else{
-            statusTime.setVisibility(View.GONE);
-            statusMedium.setVisibility(View.VISIBLE);
+            cardView.setBackgroundResource(R.color.prodeBlueAlpha);
+            statusMedium.setText(match.statusToString());
         }
 
         if(match.points > -1){
@@ -155,15 +146,20 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
         pointsMax.setText("Hasta " + match.max_points + " puntos");
 
         // Configurar el timer si fuera necesario
-        processTimer();
+        //processTimer();
     }
 
     protected void bindPenalty(){
         containerPenalty.setVisibility(View.GONE);
-        if((match.status == Match.STATUS_ENDED && match.result_one != match.result_two) // Termino el partido y no termino en empate
-                || (match.status == Match.STATUS_PENDING && (match.predicted_one == -1 && match.predicted_two == -1) || (match.predicted_one != match.predicted_two)) // Partido todavia no comenzo y no se realizo ninguna predecion de empate
-                || (match.status == Match.STATUS_IN_PROGRESS && match.result_one != match.result_two) // Partido en progreso y va empatado
-                || match.status == Match.STATUS_IN_PROGRESS){
+        if(match.status == Match.STATUS_IN_PENALTY){
+
+        }else if(match.status == Match.STATUS_ENDED && match.result_one != match.result_two){
+            return;
+        }else if(match.status == Match.STATUS_PENDING && match.predicted_one != -1 && match.predicted_two != -1){
+
+        }else if(match.status == Match.STATUS_ENDED && match.result_one == match.result_two){
+
+        }else{
             return;
         }
         containerPenalty.setVisibility(View.VISIBLE);
@@ -188,7 +184,7 @@ public class MatchViewHolder extends BaseViewHolder<Match> implements View.OnCli
             timer = null;
         }
         // Verificamos si el partido esta en progreso
-        if(match.status != Match.STATUS_IN_PROGRESS){
+        if(match.status == Match.STATUS_PENDING || match.status == Match.STATUS_ENDED){
             return;
         }
         // Creamos temporizador 90 * 60 * 1000 = 5.400.000
