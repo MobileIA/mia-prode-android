@@ -16,7 +16,6 @@ import com.mobileia.prode.entity.Match;
 import com.mobileia.recyclerview.holder.BaseViewHolder;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by matiascamiletti on 30/8/17.
